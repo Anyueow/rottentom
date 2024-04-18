@@ -44,7 +44,7 @@ def _extract(content: str, start_string: str, end_string: str) -> str:
     start_idx = content.find(start_string)
 
     if start_idx == -1:
-        return None
+        raise SiteStructureError()
 
     end_idx = content.find(end_string, start_idx)
     return content[start_idx+len(start_string):end_idx]

@@ -3,3 +3,6 @@ class LookupError(Exception):
 
 class URLCopyError(Exception):
     pass
+
+class SiteStructureError(Exception):
+    pass
