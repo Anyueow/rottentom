@@ -156,7 +156,7 @@ def tomatometer(movie_name: str, content: str = None) -> Union[int, None]:
     scoreboard = _get_score_details(content)['scoreboard']['tomatometerScore']
 
     if "value" not in scoreboard:
-        return None
+        return SiteStructureError()
 
     return scoreboard["value"]
 
@@ -183,7 +183,7 @@ def audience_score(movie_name: str, content: str = None) -> Union[int, None]:
     scoreboard = _get_score_details(content)['scoreboard']['audienceScore']
 
     if "value" not in scoreboard:
-        return None
+        return SiteStructureError()
     
     return scoreboard["value"]
 
@@ -219,15 +219,6 @@ def weighted_score(movie_name: str, content: str = None) -> Union[int, None]:
 
     t_score = tomatometer(movie_name, content)
     a_score = audience_score(movie_name, content)
-
-    if t_score is None and a_score is None:
-        return None
-
-    if t_score is None:
-        return a_score
-
-    if a_score is None:
-        return t_score
 
     return int((2/3) * t_score + ((1/3) * a_score))
 
